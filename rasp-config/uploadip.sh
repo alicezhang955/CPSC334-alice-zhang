@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /home/student334/CPSC334-alice-zhang
 git pull
-ifconfig > /home/student334/CPSC334-alice-zhang/ip.md
+ifconfig > /home/student334/CPSC334-alice-zhang/raspi-config/ip.md
 
 
 git add -A
