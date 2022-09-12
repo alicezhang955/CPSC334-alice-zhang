@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /home/student334/CPSC334-alice-zhang
-git pull
+
 
 sudo hostname -I > /home/student334/CPSC334-alice-zhang/rasp-config/ip.md
 
