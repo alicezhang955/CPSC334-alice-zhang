@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd /home/student334/CPSC334-alice-zhang
+
+/sbin/ifconfig eth0  > /home/student334/CPSC334-alice-zhang/rasp-config/ip.md
+
+
+
+
+
+
+
+
