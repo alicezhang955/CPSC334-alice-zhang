@@ -28,9 +28,13 @@ I also encountered the issue of fullscreening the two extended displays. I ended
 In order to generalize this to a normal non-rotated, non-Leeds display, the move() and display() functions under the cloud class must be altered:
 
 Replace the entire <if(xpos[i] < -90)> statement under move() with:
+
     if(getXpos() < -90) {
+
     setCloud();
+    
     }
 
 Replace the <circle(ypos[i], xpos[i], size[i])> statement under display() with:
+
     circle(xpos[i], ypos[i], size[i]);
