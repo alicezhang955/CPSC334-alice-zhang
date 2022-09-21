@@ -30,9 +30,7 @@ In order to generalize this to a normal non-rotated, non-Leeds display, the move
 Replace the entire <if(xpos[i] < -90)> statement under move() with:
 
     if(getXpos() < -90) {
-
     setCloud();
-    
     }
 
 Replace the <circle(ypos[i], xpos[i], size[i])> statement under display() with:
