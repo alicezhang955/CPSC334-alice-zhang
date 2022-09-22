@@ -31,17 +31,25 @@ def joyinput(state, input):
     		
 
 while True:
-	joyinput = GPIO.input(24)
-	print(joyinput)
-	if GPIO.input(butpin):
-		print("button not pressed")
-	else:
-		print("button presed")
+	# joyinput = GPIO.input(24)
+	# print(joyinput)
+	# if GPIO.input(butpin):
+	# 	print("button not pressed")
+	# else:
+	# 	print("button presed")
 
-	if GPIO.input(swpin):
-		print("sw off")
-	else:
-		print("sw on")
+	# if GPIO.input(swpin):
+	# 	print("sw off")
+	# else:
+	# 	print("sw on")
+
+	if GPIO.input(butpin):
+    	if state == 0:
+    		state = 1
+		elif state == 1:
+    		state = 2
+		else:
+    		state = 0
 
 
 	time.sleep(1)
