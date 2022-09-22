@@ -1,4 +1,3 @@
-
 import RPi.GPIO as GPIO
 import time
 
@@ -13,7 +12,23 @@ GPIO.setup(swpin, GPIO.IN)
 GPIO.setup(joypin, GPIO.IN)
 
 def swinput(state, input):
-	
+	if not input:
+		if state == 0:
+			print("sw on")
+		elif state == 1:
+			print("no sw")
+		else:
+			print("SW ON")
+
+def joyinput(state, input):
+    if not input:
+    	if state == 0:
+    		print("joy left")
+		elif state == 1:
+			print("tfel yoj")
+		else:
+			print("JOY LEFT")
+    		
 
 while True:
 	joyinput = GPIO.input(24)
