@@ -21,9 +21,9 @@ def swinput(state, input):
 			print("SW ON")
 
 def joyinput(state, input):
-    if not input:
-    	if state == 0:
-    		print("joy left")
+	if not input:
+    		if state == 0:
+    			print("joy left")
 		elif state == 1:
 			print("tfel yoj")
 		else:
@@ -44,13 +44,14 @@ while True:
 	# 	print("sw on")
 
 	if GPIO.input(butpin):
-    	if state == 0:
-    		state = 1
+	    	if state == 0:
+    			state = 1
 		elif state == 1:
-    		state = 2
+    			state = 2
 		else:
-    		state = 0
+    			state = 0
 
-
+	swinput(state, GPIO.input(swpin)
+	joyinput(state, GPIO.input(joypin)
 	time.sleep(1)
 
