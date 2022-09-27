@@ -2,9 +2,9 @@ import RPi.GPIO as GPIO
 import time
 
 state = 0
-butpin = 23
+butpin = 27
 swpin = 17
-joypin = 24
+joypin = 22
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(butpin, GPIO.IN)
