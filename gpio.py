@@ -31,7 +31,7 @@ def joyinput(state, input):
 
 
 while True:
-    if GPIO.input(butpin):
+    if not GPIO.input(butpin):
         if state == 0:
             state = 1
         elif state == 1:
