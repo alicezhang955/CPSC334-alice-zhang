@@ -1,6 +1,9 @@
 import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 import time
 
+state = 0
+state_change = 0
+
 def button_callback(channel):
     print("Button was pushed!")
     state_change = 1
@@ -28,6 +31,4 @@ def main():
     GPIO.cleanup() # Clean up
 
 if __name__=="__main__":
-    state = 0
-    state_change = 0
     main()
