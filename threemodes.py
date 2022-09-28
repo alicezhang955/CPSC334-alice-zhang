@@ -24,11 +24,11 @@ def swinput(state, input):
 def joyinput(state, input):
     if input:
         if state == 0:
-            print("joy left")
+            print("joystick left")
         elif state == 1:
-            print("jOy LeFt")
+            print("jOyStIcK lEfT")
         else:
-            print("JOY LEFT")
+            print("JOYSTICK LEFT")
 
 def main():
     global state
@@ -41,11 +41,9 @@ def main():
     GPIO.setup(butpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(swpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(joypin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback) 
+    GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
 
     while True:
-        print(state_change, state)
-        time.sleep(1)
         if state_change:
             if state == 0:
                 state = 1
@@ -54,9 +52,11 @@ def main():
             else:
                 state = 0
             state_change = 0
-        print(state)
-        joyinput(state, GPIO.input(joypin))
-        swinput(state, GPIO.input(swpin))
+
+        joyinput(state, not GPIO.input(joypin))
+        swinput(state, not GPIO.input(swpin))
+
+        time.sleep(1)
 
     GPIO.cleanup() # Clean up
 
