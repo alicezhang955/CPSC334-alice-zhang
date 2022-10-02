@@ -30,7 +30,9 @@ while(not SETUP):
 
 def button_callback(channel):
     print("Reset board!")
-    port.write(1)
+    reset_board = "b"
+    reset_board = reset_board + '\n'
+    port.write(reset_board)
 
 def resetTarget(channel):
     global target
