@@ -7,6 +7,8 @@ SETUP = False
 MAX_BUFF_LEN = 255
 port = None
 
+target = [0, 0, 0]
+
 prev = time.time()
 
 while(not SETUP):
@@ -39,13 +41,7 @@ def main():
     GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
 
     while(1):
-        count = 1
-    #    print(GPIO.input(butpin))
-
         time.sleep(1)
-    #     cmd = input() # Blocking, there're solutions for this ;)
-    #     if(cmd):
-    #         write_ser(cmd)
 
 
 if __name__=="__main__":
