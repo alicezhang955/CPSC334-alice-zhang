@@ -34,9 +34,16 @@ def button_callback(channel):
 
 def resetTarget(channel):
     global target
+    reset_mem = "t "
+
     for i in range(3):
         target[i] = random.randint(0, 255)
+        reset_mem = reset_mem + str(target[i]) + " "
     print("Reset target!")
+    reset_mem = reset_mem + '\n'
+    port.write(reset_mem.encode())
+    
+
 
 def main():
     global butpin
@@ -44,6 +51,7 @@ def main():
     global swpin
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(butpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(swpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
     GPIO.add_event_detect(swpin,GPIO.RISING,callback=resetTarget, bouncetime = 500) 
 
