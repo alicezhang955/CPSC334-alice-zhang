@@ -26,6 +26,7 @@ while(not SETUP):
 
 def button_callback(channel):
     print("Reset board!")
+    port.write(1)
 
 def read_ser(num_char = 1):
     string = port.read(num_char)
