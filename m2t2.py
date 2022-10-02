@@ -1,8 +1,10 @@
 import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 import serial
 import time
+import random
 
 butpin = 26
+swpin = 16
 SETUP = False
 MAX_BUFF_LEN = 255
 port = None
@@ -30,15 +32,20 @@ def button_callback(channel):
     print("Reset board!")
     port.write(1)
 
-def read_ser(num_char = 1):
-    string = port.read(num_char)
-    return string.decode()
+def resetTarget(channel):
+    global target
+    for i in range(3):
+        target[i] = random.randint(0, 255)
+    print("Reset target!")
 
 def main():
     global butpin
+    global target
+    global swpin
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(butpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
+    GPIO.add_event_detect(swpin,GPIO.RISING,callback=resetTarget, bouncetime = 500) 
 
     while(1):
         time.sleep(1)
