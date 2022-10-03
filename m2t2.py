@@ -16,7 +16,7 @@ prev = time.time()
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
+        port = serial.Serial("/dev/ttyUSB13", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
@@ -43,7 +43,7 @@ def resetTarget(channel):
     print("Reset target!")
     reset_mem = reset_mem + '\n'
     port.write(reset_mem.encode())
-    
+    print(reset_mem)
 
 
 def main():
@@ -57,7 +57,7 @@ def main():
     GPIO.add_event_detect(swpin,GPIO.RISING,callback=resetTarget, bouncetime = 500) 
 
     while(1):
-        time.sleep(1)
+        time.sleep(0.5)
 
         string = port.read()
         string = string.decode()
