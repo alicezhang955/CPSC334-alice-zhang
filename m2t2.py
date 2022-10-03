@@ -16,7 +16,7 @@ prev = time.time()
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
+        port = serial.Serial("/dev/ttyUSB23", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
@@ -30,9 +30,8 @@ while(not SETUP):
 
 def button_callback(channel):
     print("Reset board!")
-    reset_board = "b"
-    reset_board = reset_board + '\n'
-    port.write(reset_board)
+    reset_board = "b\n"
+    port.write(reset_board.encode())
 
 def resetTarget(channel):
     global target
@@ -59,6 +58,11 @@ def main():
 
     while(1):
         time.sleep(1)
+
+        string = port.read()
+        string = string.decode()
+        if(len(string)):
+            print("String: ", string)
 
 
 if __name__=="__main__":
