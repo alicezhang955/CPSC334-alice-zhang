@@ -121,12 +121,13 @@ void loop(){
         // char buf[3];
         int i1, i2, i3;
         if (3 == sscanf(str, "%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d", &i1, &i2, &i3)){
-            mainLed[0] = i1;
-            // Serial.write(itoa(mainLed[0], buf, 10));
-            mainLed[1] = i2;
-            // Serial.write(itoa(mainLed[1], buf, 10));
-            mainLed[2] = i3;
-            // Serial.write(itoa(mainLed[2], buf, 10));
+          // Serial.write("T");
+          mainLed[0] = i1;
+          // Serial.write(itoa(mainLed[0], buf, 10));
+          mainLed[1] = i2;
+          // Serial.write(itoa(mainLed[1], buf, 10));
+          mainLed[2] = i3;
+          // Serial.write(itoa(mainLed[2], buf, 10));
         }
       }
       idx = 0;
@@ -156,10 +157,10 @@ void loop(){
     }
     else if(comstate == S_STATE){
       Serial.write("S");
-      char s[3];
+      char s[16];
       int index = 2;
-      char buf[15];
-      char cpy[4];
+      char buf[32];
+      char cpy[16];
       buf[0] = 'p';
       buf[1] = '1'; //differ by player
       buf[2] = '\0';
