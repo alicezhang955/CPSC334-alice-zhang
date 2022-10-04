@@ -25,7 +25,7 @@ gameOver = 0
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
+        port = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
@@ -94,24 +94,31 @@ def extractVals(string):
         elif(count == 3):
             val3 += string[i]
 
-
     print("player: ", player, " val1: ", val1, " val2: ", val2, " val3: ", val3)
     calculateDist(int(val1), int(val2), int(val3), int(player))
     GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
     return;
 
 def winnerFlash(player):
+    global winner
     global gameOver
     gameOver = 1
+
+    for i in range(3):
+        winner[i] = 0
+
     string = "w" + player + '\n'
     port.write(string.encode())
     print("Flashing Winner" + player + "!")
     return;
 
-def reset_game():
+def reset_game(channel):
+    global gameOver
+    gameOver = 0
     string = "r\n"
     port.write(string.encode())
     print("Reset game!")
+    return;
 
 
 def main():
@@ -125,7 +132,7 @@ def main():
 
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(butpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.setup(resetpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(resetpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(swpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(subpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
