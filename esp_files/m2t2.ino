@@ -3,6 +3,7 @@
 #define NO_STATE 0
 #define B_STATE 1
 #define T_STATE 2
+#define S_STATE 3
 #define CMD_BUFF_LEN 13
 
 int rled = 23;
@@ -82,6 +83,9 @@ int interpret(char c){
   else if(c == 't'){
     return T_STATE; 
   }
+  else if(c == 's'){
+    return S_STATE;
+  }
   else{
     return NO_STATE;
   }
@@ -112,12 +116,6 @@ void loop(){
     else{ // Done reading
       str[idx] = '\0'; // Convert it to a string
       comstate = interpret(str[0]);
-
-      // int j = 0;
-      // while(str[j] != '\0'){
-      //   Serial.write(str[j]);
-      //   j++;
-      // }
       
       if(comstate == T_STATE){
         // char buf[3];
@@ -154,6 +152,28 @@ void loop(){
       // analogWrite(rledMain, mainLed[0]);
       // analogWrite(gledMain, mainLed[1]);
       // analogWrite(bledMain, mainLed[2]);
+      comstate = NO_STATE;
+    }
+    else if(comstate == S_STATE){
+      Serial.write("S");
+      char s[3];
+      int index = 2;
+      char buf[15];
+      char cpy[4];
+      buf[0] = 'p';
+      buf[1] = '1'; //differ by player
+      buf[2] = '\0';
+
+      for(int i = 0; i < 3; i++){
+        strncpy(cpy, " ", 1);
+        strncat(buf, cpy, 1);
+        strncpy(cpy, itoa(ledArray[i], s, 10), 3);
+        strncat(buf, cpy, 3);
+      }
+      strncpy(cpy, "d", 1);
+      strncat(buf, cpy, 1);
+
+      Serial.write(buf);
       comstate = NO_STATE;
     }
     analogWrite(rledMain, mainLed[0]);
