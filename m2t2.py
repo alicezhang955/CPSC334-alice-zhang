@@ -40,12 +40,6 @@ def button_callback(channel):
     port.write(reset_board.encode())
     return;
 
-def submitColor(channel):
-    print("Submit color!")
-    sub_col = "s\n"
-    port.write(sub_col.encode())
-    return;
-
 def resetTarget(channel):
     global target
     reset_mem = "t "
@@ -60,6 +54,12 @@ def resetTarget(channel):
 
     return;
 
+def submitColor(channel):
+    print("Submit color!")
+    sub_col = "s\n"
+    port.write(sub_col.encode())
+    return;
+
 def calculateDist(val1, val2, val3, player):
     global target
     global winner
@@ -72,6 +72,7 @@ def calculateDist(val1, val2, val3, player):
 
 
 def extractVals(string):
+    GPIO.remove_event_detect(button_callback)
     global target
     count = 0
     val1 = ""
@@ -94,6 +95,7 @@ def extractVals(string):
 
     print("player: ", player, " val1: ", val1, " val2: ", val2, " val3: ", val3)
     calculateDist(int(val1), int(val2), int(val3), int(player))
+    GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
     return;
 
 
