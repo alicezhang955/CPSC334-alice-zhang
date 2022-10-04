@@ -22,7 +22,7 @@ winner = [0, 0, 0]
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
+        port = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
@@ -127,7 +127,7 @@ def main():
                 if(string == "d"):
                     read_state = 0
                     print(val_string)
-                    GPIO.remove_event_detect(button_callback)
+                    GPIO.remove_event_detect(butpin)
                     extractVals(val_string)
                 else:
                     val_string += string
