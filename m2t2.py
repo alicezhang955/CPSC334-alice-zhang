@@ -22,7 +22,7 @@ winner = [0, 0, 0]
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
+        port = serial.Serial("/dev/ttyUSB3", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
@@ -64,7 +64,7 @@ def calculateDist(val1, val2, val3, player):
     global target
     global winner
     distance = np.sqrt((val1 - target[0])**2 + (val2 - target[1])**2 + (val3 - target[2])**2)
-
+    print("vals = ", val1, val2, val3, target[0], target[1], target[2], "distance = ", distance)
     if(distance < 100):
         winner[player] = 1
         print("WINNER = ", player)
