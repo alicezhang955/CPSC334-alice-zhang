@@ -12,12 +12,12 @@ int bval = 0;
 int gled = 21;
 int gval = 0;
 
-int rledMain = 7;
-int bledMain = 8;
+int rledMain = 0;
+int bledMain = 2;
 int gledMain = 15;
 
 int ledArray[3] = {0, 0, 0}; //0 = red, 1 = green, 2 = blue
-int mainLed[3] = {100, 200, 100};
+int mainLed[3] = {0, 0, 0};
 
 int state = 0;
 
@@ -93,6 +93,9 @@ void setup(){
   pinMode(rled, OUTPUT);
   pinMode(bled, OUTPUT);
   pinMode(gled, OUTPUT);
+  pinMode(rledMain, OUTPUT);
+  pinMode(bledMain, OUTPUT);
+  pinMode(gledMain, OUTPUT);
   pinMode(joypin, INPUT);
   button.begin();
   button.onPressed(setState);
@@ -104,25 +107,29 @@ void loop(){
     c = Serial.read();
     if(c != '\n'){ // Still reading
       str[idx++] = c; // Parse the string byte (char) by byte
-      // Serial.write(c);
+      Serial.write(c);
     }
     else{ // Done reading
       str[idx] = '\0'; // Convert it to a string
       comstate = interpret(str[0]);
+
+      // int j = 0;
+      // while(str[j] != '\0'){
+      //   Serial.write(str[j]);
+      //   j++;
+      // }
       
       if(comstate == T_STATE){
-          int i;
-          char *ptr = str;
-          while (*ptr) { 
-              if (isdigit(*ptr) || ( (*ptr=='-'||*ptr=='+') && isdigit(*(ptr+1)) )) {
-                  i = 1;
-                  Serial.write("G");
-                  mainLed[i] = strtol(ptr, &ptr, 10); 
-                  i++;
-              } else { 
-                  ptr++; 
-              } 
-          }
+        // char buf[3];
+        int i1, i2, i3;
+        if (3 == sscanf(str, "%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d", &i1, &i2, &i3)){
+            mainLed[0] = i1;
+            // Serial.write(itoa(mainLed[0], buf, 10));
+            mainLed[1] = i2;
+            // Serial.write(itoa(mainLed[1], buf, 10));
+            mainLed[2] = i3;
+            // Serial.write(itoa(mainLed[2], buf, 10));
+        }
       }
       idx = 0;
     }
@@ -140,26 +147,18 @@ void loop(){
     }
     else if(comstate == T_STATE){
       // Serial.write("A");
-      ledArray[0] = mainLed[0];
-      ledArray[1] = mainLed[1];
-      ledArray[2] = mainLed[2];
-      if(mainLed[0] > mainLed[1]){
-        Serial.write("P");
-      }
-      // if(mainLed[0] > mainLed[2]){
-      //   Serial.write("Y");
-      // }
-      // if(mainLed[1] > mainLed[2]){
-      //   Serial.write("M");
-      // }
+      // ledArray[0] = mainLed[0];
+      // ledArray[1] = mainLed[1];
+      // ledArray[2] = mainLed[2];
+
       // analogWrite(rledMain, mainLed[0]);
       // analogWrite(gledMain, mainLed[1]);
       // analogWrite(bledMain, mainLed[2]);
       comstate = NO_STATE;
     }
-    // analogWrite(rledMain, mainLed[0]);
-    // analogWrite(gledMain, mainLed[1]);
-    // analogWrite(bledMain, mainLed[2]);
+    analogWrite(rledMain, mainLed[0]);
+    analogWrite(gledMain, mainLed[1]);
+    analogWrite(bledMain, mainLed[2]);
     analogWrite(rled, ledArray[0]);
     analogWrite(gled, ledArray[1]);
     analogWrite(bled, ledArray[2]);
