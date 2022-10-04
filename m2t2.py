@@ -97,6 +97,12 @@ def extractVals(string):
     GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
     return;
 
+def winnerFlash(player):
+    string = "w" + player + '\n'
+    port.write(string.encode())
+    print("Flashing Winner!")
+    return;
+
 
 def main():
     global butpin
@@ -115,6 +121,10 @@ def main():
 
     while(1):
         time.sleep(0.5)
+
+        for i in range(3):
+            if(winner[i] == 1):
+                winnerFlash(i)
 
         string = port.read()
         string = string.decode()
