@@ -24,7 +24,7 @@ gameOver = 0
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port = serial.Serial("/dev/ttyUSB3", 115200, timeout=1)
+        port = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
