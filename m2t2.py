@@ -7,6 +7,7 @@ import numpy as np
 butpin = 26
 swpin = 16
 subpin = 6
+resetpin = 5
 SETUP = False
 MAX_BUFF_LEN = 255
 port = None
@@ -107,20 +108,28 @@ def winnerFlash(player):
     print("Flashing Winner" + player + "!")
     return;
 
+def reset_game():
+    string = "r\n"
+    port.write(string.encode())
+    print("Reset game!")
+
 
 def main():
     global butpin
     global target
     global swpin
     global subpin
+    global resetpin
     global read_state
     global gameOver
 
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(butpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(resetpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(swpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(subpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
+    GPIO.add_event_detect(resetpin,GPIO.RISING,callback=reset_game, bouncetime = 500) 
     GPIO.add_event_detect(swpin,GPIO.RISING,callback=resetTarget, bouncetime = 500)
     GPIO.add_event_detect(subpin,GPIO.RISING,callback=submitColor, bouncetime = 500) 
 
