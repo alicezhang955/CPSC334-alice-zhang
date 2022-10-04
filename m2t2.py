@@ -53,6 +53,29 @@ def resetTarget(channel):
     port.write(reset_mem.encode())
     print(reset_mem)
 
+def extractVals(str string):
+    global target
+    count = 0
+    val1 = ""
+    val2 = ""
+    val3 = ""
+
+    player = string[1]
+
+    for i in range(len(string)):
+        if(string[i] == " "):
+            count += 1
+
+        if(count == 1):
+            val1 += string[i]
+        elif(count == 2):
+            val2 += string[i]
+        else:
+            val3 += string[i]
+
+
+    print("player: ", player, " val1: ", val1, " val2: ", val2, " val3: ", val3)
+
 
 def main():
     global butpin
