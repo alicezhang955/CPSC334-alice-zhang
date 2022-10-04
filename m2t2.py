@@ -35,11 +35,13 @@ def button_callback(channel):
     print("Reset board!")
     reset_board = "b\n"
     port.write(reset_board.encode())
+    return;
 
 def submitColor(channel):
     print("Submit color!")
     sub_col = "s\n"
     port.write(sub_col.encode())
+    return;
 
 def resetTarget(channel):
     global target
@@ -52,6 +54,8 @@ def resetTarget(channel):
     reset_mem = reset_mem + '\n'
     port.write(reset_mem.encode())
     print(reset_mem)
+
+    return;
 
 def extractVals(string):
     global target
@@ -75,6 +79,8 @@ def extractVals(string):
 
 
     print("player: ", player, " val1: ", val1, " val2: ", val2, " val3: ", val3)
+
+    return;
 
 
 def main():
