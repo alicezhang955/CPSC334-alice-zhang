@@ -68,6 +68,7 @@ def calculateDist(val1, val2, val3, player):
     if(distance < 100):
         winner[player] = 1
         print("WINNER = ", player)
+    return;
 
 
 def extractVals(string):
@@ -92,7 +93,7 @@ def extractVals(string):
 
 
     print("player: ", player, " val1: ", val1, " val2: ", val2, " val3: ", val3)
-    calculateDist(val1, val2, val3, player)
+    calculateDist(int(val1), int(val2), int(val3), int(player))
     return;
 
 
@@ -128,7 +129,7 @@ def main():
                     extractVals(val_string)
                 else:
                     val_string += string
-                   
+                
                 
 
 
