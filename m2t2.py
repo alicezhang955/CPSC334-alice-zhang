@@ -10,6 +10,8 @@ SETUP = False
 MAX_BUFF_LEN = 255
 port = None
 
+read_state = 0
+
 target = [0, 0, 0]
 
 prev = time.time()
@@ -17,7 +19,7 @@ prev = time.time()
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
+        port = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
@@ -72,6 +74,8 @@ def main():
         string = string.decode()
         if(len(string)):
             print("String: ", string)
+            if(string == 'p'):
+                read_state = 1
 
 
 if __name__=="__main__":
