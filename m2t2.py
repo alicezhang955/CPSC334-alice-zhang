@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 import serial
 import time
 import random
+import numpy as np
 
 butpin = 26
 swpin = 16
@@ -15,6 +16,8 @@ read_state = 0
 target = [0, 0, 0]
 
 prev = time.time()
+
+winner = [0, 0, 0]
 
 while(not SETUP):
     try:
@@ -57,6 +60,16 @@ def resetTarget(channel):
 
     return;
 
+def calculateDist(val1, val2, val3, player):
+    global target
+    global winner
+    distance = np.sqrt((val1 - target[0])**2 + (val2 - target[1])**2 + (val3 - target[2])**2)
+
+    if(distance < 100):
+        winner[player] = 1
+        print("WINNER = ", player)
+
+
 def extractVals(string):
     global target
     count = 0
@@ -79,7 +92,7 @@ def extractVals(string):
 
 
     print("player: ", player, " val1: ", val1, " val2: ", val2, " val3: ", val3)
-
+    calculateDist(val1, val2, val3, player)
     return;
 
 
@@ -106,7 +119,6 @@ def main():
         if(len(string)):
             print("String: ", string)
             if(string == "p"):
-                print("enter processing")
                 val_string = ""
                 read_state = 1
             if(read_state > 0):
