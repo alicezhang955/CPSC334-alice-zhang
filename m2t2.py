@@ -19,6 +19,8 @@ prev = time.time()
 
 winner = [0, 0, 0]
 
+gameOver = 0
+
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
@@ -98,6 +100,8 @@ def extractVals(string):
     return;
 
 def winnerFlash(player):
+    global gameOver
+    gameOver = 1
     string = "w" + player + '\n'
     port.write(string.encode())
     print("Flashing Winner" + player + "!")
@@ -110,6 +114,7 @@ def main():
     global swpin
     global subpin
     global read_state
+    global gameOver
 
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(butpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -122,9 +127,10 @@ def main():
     while(1):
         time.sleep(0.5)
 
-        for i in range(3):
-            if(winner[i] == 1):
-                winnerFlash(i)
+        if(not gameOver):
+            for i in range(3):
+                if(winner[i] == 1):
+                    winnerFlash(str(i))
 
         string = port.read()
         string = string.decode()
