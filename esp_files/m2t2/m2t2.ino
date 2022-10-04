@@ -6,24 +6,33 @@
 #define S_STATE 3
 #define CMD_BUFF_LEN 13
 
-int rled = 23;
+/** Declaring variable pins (Sachi's version) **/
+
+//Player LEDs for green button
+int rled = 19; //previously 23
 int rval = 0;
-int bled = 22;
+int bled = 5; //previously 22
 int bval = 0; 
-int gled = 21;
+int gled = 18; //previously 21
 int gval = 0;
 
+//Main Game LED
 int rledMain = 0;
-int bledMain = 2;
-int gledMain = 15;
+int bledMain = 0;
+int gledMain = 0;
 
+//LED Array that holds player LED values
 int ledArray[3] = {0, 0, 0}; //0 = red, 1 = green, 2 = blue
+
+//LED Array that holds Main LED value
 int mainLed[3] = {0, 0, 0};
 
 int state = 0;
 
-int joypin = 25;
-EasyButton button(33);
+// Joystick Y Range
+int joypin = 34; //Previously 25
+//Joystick button
+EasyButton button(13); //previously 33
 
 int clearBoard = 0;
 
@@ -107,6 +116,7 @@ void setup(){
 
 void loop(){
   button.read(); 
+  
   if(Serial.available() > 0){
     c = Serial.read();
     if(c != '\n'){ // Still reading
@@ -135,6 +145,8 @@ void loop(){
   }
   if(millis() % 500 == 0){
     int joyinput = analogRead(joypin);
+    Serial.print("Joyinput:");
+    Serial.println(joyinput);
     setColors(joyinput, state);
 
     if(comstate == B_STATE){
@@ -183,9 +195,12 @@ void loop(){
     analogWrite(rled, ledArray[0]);
     analogWrite(gled, ledArray[1]);
     analogWrite(bled, ledArray[2]);
-    // Serial.println(ledArray[0]);
-    // Serial.println(ledArray[1]);
-    // Serial.println(ledArray[2]);
+    Serial.print("Red:");
+    Serial.println(ledArray[0]);
+    Serial.print("Green:");
+    Serial.println(ledArray[1]);
+    Serial.print("Blue:");
+    Serial.println(ledArray[2]);
 
 
   }
