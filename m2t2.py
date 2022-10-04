@@ -129,19 +129,19 @@ def reset_game(channel):
 
 
 def main():
-    global butpin
+    global butpin1
     global target
     global swpin
-    global subpin
+    global subpin1
     global resetpin
     global read_state
     global gameOver
 
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(butpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(butpin1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(resetpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(swpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(subpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(subpin1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.add_event_detect(butpin1,GPIO.RISING,callback=button_callback1, bouncetime = 500) 
     # GPIO.add_event_detect(butpin2,GPIO.RISING,callback=button_callback, bouncetime = 500) 
     GPIO.add_event_detect(resetpin,GPIO.RISING,callback=reset_game, bouncetime = 500) 
