@@ -19,7 +19,7 @@ prev = time.time()
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
+        port = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
@@ -53,29 +53,6 @@ def resetTarget(channel):
     port.write(reset_mem.encode())
     print(reset_mem)
 
-def extractVals(string):
-    global target
-    count = 0
-    val1 = ""
-    val2 = ""
-    val3 = ""
-
-    player = string[1]
-
-    for i in range(len(string)):
-        if(string[i] == " "):
-            count += 1
-
-        if(count == 1):
-            val1 += string[i]
-        elif(count == 2):
-            val2 += string[i]
-        else:
-            val3 += string[i]
-
-
-    print("player: ", player, " val1: ", val1, " val2: ", val2, " val3: ", val3)
-
 
 def main():
     global butpin
@@ -87,7 +64,7 @@ def main():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(butpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(swpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(subpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(subpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
     GPIO.add_event_detect(swpin,GPIO.RISING,callback=resetTarget, bouncetime = 500)
     GPIO.add_event_detect(subpin,GPIO.RISING,callback=submitColor, bouncetime = 500) 
@@ -104,13 +81,11 @@ def main():
                 val_string = ""
                 read_state = 1
             if(read_state > 0):
-                if(string == "d"):
+                if(string == " "):
+                    val_string += string
+                
                     read_state = 0
                     print(val_string)
-                    extractVals(val_string)
-                else:
-                    val_string += string
-                   
                 
 
 
