@@ -74,7 +74,7 @@ def extractVals(string):
             val1 += string[i]
         elif(count == 2):
             val2 += string[i]
-        else:
+        elif(count == 3):
             val3 += string[i]
 
 
