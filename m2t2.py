@@ -100,7 +100,7 @@ def extractVals(string):
 def winnerFlash(player):
     string = "w" + player + '\n'
     port.write(string.encode())
-    print("Flashing Winner!")
+    print("Flashing Winner" + player + "!")
     return;
 
 
