@@ -75,7 +75,15 @@ def main():
         if(len(string)):
             print("String: ", string)
             if(string == 'p'):
+                val_string = ""
                 read_state = 1
+            if(read_state == 1):
+                if(string != '\0'):
+                    val_string += string
+                else:
+                    read_state = 0
+                    print(val_string)
+                
 
 
 if __name__=="__main__":
