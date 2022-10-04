@@ -72,7 +72,6 @@ def calculateDist(val1, val2, val3, player):
 
 
 def extractVals(string):
-    GPIO.remove_event_detect(button_callback)
     global target
     count = 0
     val1 = ""
@@ -128,6 +127,7 @@ def main():
                 if(string == "d"):
                     read_state = 0
                     print(val_string)
+                    GPIO.remove_event_detect(button_callback)
                     extractVals(val_string)
                 else:
                     val_string += string
