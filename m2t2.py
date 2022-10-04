@@ -19,7 +19,7 @@ prev = time.time()
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
+        port = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
@@ -59,6 +59,8 @@ def main():
     global target
     global swpin
     global subpin
+    global read_state
+
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(butpin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(swpin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -74,15 +76,17 @@ def main():
         string = string.decode()
         if(len(string)):
             print("String: ", string)
-            if(string == 'p'):
+            if(string == "p"):
+                print("enter processing")
                 val_string = ""
                 read_state = 1
-            if(read_state == 1):
-                if(string != '\0'):
-                    val_string += string
-                else:
+            if(read_state > 0):
+                if(string == "d"):
                     read_state = 0
                     print(val_string)
+                else:
+                    val_string += string
+                   
                 
 
 
