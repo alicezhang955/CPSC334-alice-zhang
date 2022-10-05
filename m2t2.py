@@ -113,14 +113,14 @@ def calculateDist(val1, val2, val3, player):
     return;
 
 
-def extractVals(string):
+def extractVals(string, player):
     global target
     count = 0
     val1 = ""
     val2 = ""
     val3 = ""
 
-    player = string[1]
+    # player = string[1]
 
     for i in range(len(string)):
         if(string[i] == " "):
@@ -134,7 +134,7 @@ def extractVals(string):
             val3 += string[i]
 
     print("player: ", player, " val1: ", val1, " val2: ", val2, " val3: ", val3)
-    calculateDist(int(val1), int(val2), int(val3), int(player))
+    calculateDist(int(val1), int(val2), int(val3), player)
     # GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
     return;
 
@@ -228,7 +228,7 @@ def main():
                     read_state_1 = 0
                     print(val_string1)
                     # GPIO.remove_event_detect(butpin)
-                    extractVals(val_string1)
+                    extractVals(val_string1, 1)
                 else:
                     val_string1 += string1
 
@@ -244,7 +244,7 @@ def main():
                     read_state_2 = 0
                     print(val_string2)
                     # GPIO.remove_event_detect(butpin)
-                    extractVals(val_string2)
+                    extractVals(val_string2, 2)
                 else:
                     val_string2 += string2
 
@@ -260,7 +260,7 @@ def main():
         #             read_state_3 = 0
         #             print(val_string3)
         #             # GPIO.remove_event_detect(butpin)
-        #             extractVals(val_string3)
+        #             extractVals(val_string3, 3)
         #         else:
         #             val_string3 += string3
                 
