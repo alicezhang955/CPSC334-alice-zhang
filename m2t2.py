@@ -178,6 +178,8 @@ def main():
     global randomize_color_switch
 
     global read_state_1
+    global read_state_2
+    global read_state_3
     global gameOver
     global target
 
