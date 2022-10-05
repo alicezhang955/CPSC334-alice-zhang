@@ -11,7 +11,7 @@ reset_button_2 = 23
 randomize_color_switch = 16
 
 submit_switch_1 = 6
-submit_switch_2 = 0
+submit_switch_2 = 24
 # submit_switch_3 = 0
 
 reset_game_pin = 5
@@ -39,7 +39,7 @@ while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
         port1 = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
-        port2 = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
+        port2 = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
         # port3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
