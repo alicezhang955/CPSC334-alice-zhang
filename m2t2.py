@@ -246,21 +246,21 @@ def main():
                 else:
                     val_string2 += string2
 
-        string3 = port3.read()
-        string3 = string3.decode()
-        if(len(string3)):
-            print("String: ", string3)
-            if(string3 == "p"):
-                val_string3 = ""
-                read_state_3 = 1
-            if(read_state_3 > 0):
-                if(string3 == "d"):
-                    read_state_3 = 0
-                    print(val_string3)
-                    # GPIO.remove_event_detect(butpin)
-                    extractVals(val_string3)
-                else:
-                    val_string3 += string3
+        # string3 = port3.read()
+        # string3 = string3.decode()
+        # if(len(string3)):
+        #     print("String: ", string3)
+        #     if(string3 == "p"):
+        #         val_string3 = ""
+        #         read_state_3 = 1
+        #     if(read_state_3 > 0):
+        #         if(string3 == "d"):
+        #             read_state_3 = 0
+        #             print(val_string3)
+        #             # GPIO.remove_event_detect(butpin)
+        #             extractVals(val_string3)
+        #         else:
+        #             val_string3 += string3
                 
                 
 
