@@ -236,7 +236,7 @@ def main():
         string2 = port2.read()
         string2 = string2.decode()
         if(len(string2)):
-            print("String: ", string2)
+            # print("String: ", string2)
             if(string2 == "p"):
                 val_string2 = ""
                 read_state_2 = 1
@@ -252,7 +252,7 @@ def main():
         string3 = port3.read()
         string3 = string3.decode()
         if(len(string3)):
-            print("String: ", string3)
+            # print("String: ", string3)
             if(string3 == "p"):
                 val_string3 = ""
                 read_state_3 = 1
