@@ -6,11 +6,15 @@ import numpy as np
 
 reset_button_1 = 26
 reset_button_2 = 17
+<<<<<<< HEAD
+# reset_button_3 = 0
+=======
 reset_button_3 = 27
+>>>>>>> 8f88117053b6a19ae0818323d443631bba67d612
 
 randomize_color_switch = 16
 
-submit_switch_1 = 6
+submit_switch_1 = 27 #6
 submit_switch_2 = 24
 # submit_switch_3 = 0
 
@@ -38,9 +42,15 @@ gameOver = 0
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
+<<<<<<< HEAD
+        port1 = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
+        port2 = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
+        # port3 = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
+=======
         port1 = serial.Serial("/dev/ttyUSB4", 115200, timeout=1)
         port2 = serial.Serial("/dev/ttyUSB3", 115200, timeout=1)
         # port3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
+>>>>>>> 8f88117053b6a19ae0818323d443631bba67d612
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
@@ -134,7 +144,7 @@ def extractVals(string, player):
             val3 += string[i]
 
     print("player: ", player, " val1: ", val1, " val2: ", val2, " val3: ", val3)
-    calculateDist(int(val1), int(val2), int(val3), player)
+    calculateDist(int(val1), int(val2), int(val3), int(player))
     # GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
     return;
 
