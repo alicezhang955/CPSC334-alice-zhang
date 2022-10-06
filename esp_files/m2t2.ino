@@ -4,6 +4,8 @@
 #define B_STATE 1
 #define T_STATE 2
 #define S_STATE 3
+#define W_STATE 4
+#define R_STATE 5
 #define CMD_BUFF_LEN 13
 
 int rled = 23;
@@ -39,10 +41,10 @@ int comstate = 0;
 void setColors(int joyinput, int state){ //state = color index, increment = -1, 0, 1
   int increment;
   if(joyinput < 100){
-    increment = 1;
+    increment = -1;
   }
   else if(joyinput > 4000){
-    increment = -1;
+    increment = 1;
   }
   else{
     increment = 0;
@@ -85,6 +87,12 @@ int interpret(char c){
   }
   else if(c == 's'){
     return S_STATE;
+  }
+  else if(c == 'w'){
+    return W_STATE;
+  }
+  else if(c == 'r'){
+    return R_STATE;
   }
   else{
     return NO_STATE;
@@ -135,6 +143,7 @@ void loop(){
   }
   if(millis() % 500 == 0){
     int joyinput = analogRead(joypin);
+    // Serial.println(joyinput);
     setColors(joyinput, state);
 
     if(comstate == B_STATE){
@@ -175,6 +184,29 @@ void loop(){
       strncat(buf, cpy, 1);
 
       Serial.write(buf);
+      comstate = NO_STATE;
+    }
+    else if(comstate == W_STATE){
+      // Serial.write("W");
+      if(millis() % 1000 >= 500){
+        ledArray[0] = 0;
+        ledArray[1] = 0;
+        ledArray[2] = 0;
+      }
+      else{
+        ledArray[0] = 255;
+        ledArray[1] = 255;
+        ledArray[2] = 255;        
+      }
+    }
+    else if(comstate == R_STATE){
+      Serial.write("R");
+        ledArray[0] = 0;
+        ledArray[1] = 0;
+        ledArray[2] = 0;
+        mainLed[0] = 0;
+        mainLed[1] = 0;
+        mainLed[2] = 0;      
       comstate = NO_STATE;
     }
     analogWrite(rledMain, mainLed[0]);
