@@ -10,7 +10,7 @@ reset_button_2 = 17
 
 randomize_color_switch = 16
 
-submit_switch_1 = 6
+submit_switch_1 = 14 #6
 submit_switch_2 = 24
 # submit_switch_3 = 0
 
