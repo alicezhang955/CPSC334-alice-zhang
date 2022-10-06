@@ -155,7 +155,7 @@ def winnerFlash(player):
         port2.write(string.encode())
     else:
         port3.write(string.encode())
-    print("Flashing Winner" + player + "!")
+    print("Flashing Winner" + str(player) + "!")
     return;
 
 def reset_game(channel):
@@ -227,18 +227,21 @@ def main():
         string1 = port1.read()
         string1 = string1.decode()
         if(len(string1)):
+            print("String: ", string1)
             if(string1 == "w"):
                 winnerFlash(0)
 
         string2 = port2.read()
         string2 = string2.decode()
         if(len(string2)):
+            print("String: ", string2)
             if(string2 == "w"):
                 winnerFlash(1)
 
         string3 = port3.read()
         string3 = string3.decode()
         if(len(string3)):
+            print("String: ", string3)
             if(string3 == "w"):
                 winnerFlash(2)
 
