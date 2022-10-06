@@ -38,9 +38,9 @@ gameOver = 0
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port1 = serial.Serial("/dev/ttyUSB3", 115200, timeout=1)
-        port2 = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
-        port3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
+        port1 = serial.Serial("/dev/ttyUSB9", 115200, timeout=1)
+        port2 = serial.Serial("/dev/ttyUSB7", 115200, timeout=1)
+        port3 = serial.Serial("/dev/ttyUSB8", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
@@ -227,21 +227,21 @@ def main():
         string1 = port1.read()
         string1 = string1.decode()
         if(len(string1)):
-            print("String: ", string1)
+#            print("String: ", string1)
             if(string1 == "w"):
                 winnerFlash(0)
 
         string2 = port2.read()
         string2 = string2.decode()
         if(len(string2)):
-            print("String: ", string2)
+ #           print("String: ", string2)
             if(string2 == "w"):
                 winnerFlash(1)
 
         string3 = port3.read()
         string3 = string3.decode()
         if(len(string3)):
-            print("String: ", string3)
+  #          print("String: ", string3)
             if(string3 == "w"):
                 winnerFlash(2)
 
