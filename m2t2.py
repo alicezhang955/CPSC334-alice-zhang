@@ -108,7 +108,7 @@ def calculateDist(val1, val2, val3, player):
     distance = np.sqrt((val1 - target[0])**2 + (val2 - target[1])**2 + (val3 - target[2])**2)
     print("vals = ", val1, val2, val3, target[0], target[1], target[2], "distance = ", distance)
     if(distance < 100):
-        print("WINNER = ", player)
+        print("WINNER = ", player + 1)
         winner[player] = 1
     return;
 
@@ -229,7 +229,7 @@ def main():
                     read_state_1 = 0
                     print(val_string1)
                     # GPIO.remove_event_detect(butpin)
-                    extractVals(val_string1, 1)
+                    extractVals(val_string1, 0)
                 else:
                     val_string1 += string1
 
@@ -245,7 +245,7 @@ def main():
                     read_state_2 = 0
                     print(val_string2)
                     # GPIO.remove_event_detect(butpin)
-                    extractVals(val_string2, 2)
+                    extractVals(val_string2, 1)
                 else:
                     val_string2 += string2
 
@@ -261,7 +261,7 @@ def main():
                     read_state_3 = 0
                     print(val_string3)
                     # GPIO.remove_event_detect(butpin)
-                    extractVals(val_string3, 3)
+                    extractVals(val_string3, 2)
                 else:
                     val_string3 += string3
                 
