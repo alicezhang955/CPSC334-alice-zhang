@@ -5,8 +5,8 @@ import random
 import numpy as np
 
 reset_button_1 = 26
-reset_button_2 = 23
-# reset_button_3 = 0
+reset_button_2 = 17
+reset_button_3 = 27
 
 randomize_color_switch = 16
 
