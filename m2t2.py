@@ -47,7 +47,7 @@ while(not SETUP):
             print("No serial detected, please plug your uController")
             prev = time.time()
 
-    if(port1 is not None and port2 is not None): # We're connected
+    if(port1 is not None): # We're connected //and port2 is not None
         SETUP = True
         print("connected")
 
