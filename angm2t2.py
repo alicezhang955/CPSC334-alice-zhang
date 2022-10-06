@@ -6,11 +6,7 @@ import numpy as np
 
 reset_button_1 = 26
 reset_button_2 = 17
-<<<<<<< HEAD
-# reset_button_3 = 0
-=======
-reset_button_3 = 27
->>>>>>> 8f88117053b6a19ae0818323d443631bba67d612
+#reset_button_3 = 27
 
 randomize_color_switch = 16
 
@@ -42,15 +38,9 @@ gameOver = 0
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-<<<<<<< HEAD
         port1 = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
         port2 = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
-        # port3 = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
-=======
-        port1 = serial.Serial("/dev/ttyUSB4", 115200, timeout=1)
-        port2 = serial.Serial("/dev/ttyUSB3", 115200, timeout=1)
         # port3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
->>>>>>> 8f88117053b6a19ae0818323d443631bba67d612
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
@@ -129,6 +119,8 @@ def extractVals(string, player):
     val1 = ""
     val2 = ""
     val3 = ""
+
+    print("string:", string)
 
     # player = string[1]
 
@@ -229,18 +221,21 @@ def main():
         string1 = port1.read()
         string1 = string1.decode()
         if(len(string1)):
-            print("String: ", string1)
+            print("String: ", string1, read_state_1)
             if(string1 == "p"):
+                print("string is p")
                 val_string1 = ""
                 read_state_1 = 1
-            if(read_state_1 > 0):
+            if(read_state_1 == 1):
                 if(string1 == "d"):
-                    read_state_1 = 0
+                    read_state_1 = 2
                     print(val_string1)
                     # GPIO.remove_event_detect(butpin)
                     extractVals(val_string1, 1)
                 else:
+                    print("pre append:", string1)
                     val_string1 += string1
+                    print("after append:", val_string1)
 
         string2 = port2.read()
         string2 = string2.decode()
@@ -279,3 +274,4 @@ def main():
 
 if __name__=="__main__":
     main()
+
