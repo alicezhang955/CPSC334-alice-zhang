@@ -190,11 +190,11 @@ def main():
     GPIO.setup(reset_button_3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     
     GPIO.setup(submit_switch_1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.setup(submit_switch_2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(submit_switch_3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(submit_switch_2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(submit_switch_3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-    GPIO.setup(reset_game_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(randomize_color_switch, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(reset_game_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(randomize_color_switch, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
     GPIO.add_event_detect(reset_button_1,GPIO.RISING,callback=reset_board_1, bouncetime = 500) 
