@@ -38,8 +38,8 @@ gameOver = 0
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port1 = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
-        port2 = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
+        port1 = serial.Serial("/dev/ttyUSB4", 115200, timeout=1)
+        port2 = serial.Serial("/dev/ttyUSB3", 115200, timeout=1)
         # port3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
