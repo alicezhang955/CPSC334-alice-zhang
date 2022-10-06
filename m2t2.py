@@ -4,7 +4,7 @@ import time
 import random
 import numpy as np
 
-reset_button_1 = 26
+reset_button_1 = 16
 reset_button_2 = 17
 reset_button_3 = 27
 
@@ -38,8 +38,8 @@ gameOver = 0
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port1 = serial.Serial("/dev/ttyUSB4", 115200, timeout=1)
-        port2 = serial.Serial("/dev/ttyUSB3", 115200, timeout=1)
+        port1 = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
+        #port2 = serial.Serial("/dev/ttyUSB3", 115200, timeout=1)
         # port3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
 
     except: # Bad way of writing excepts (always know your errors)
