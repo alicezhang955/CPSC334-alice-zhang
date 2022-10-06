@@ -147,9 +147,9 @@ def winnerFlash(player):
         winner[i] = 0
 
     string = "w" + player + '\n'
-    if(player == "1"):
+    if(player == "0"):
         port1.write(string.encode())
-    elif(player == "2"):
+    elif(player == "1"):
         port2.write(string.encode())
     else:
         port3.write(string.encode())
