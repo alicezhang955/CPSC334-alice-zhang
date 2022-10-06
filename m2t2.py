@@ -161,6 +161,8 @@ def reset_game(channel):
     gameOver = 0
     string = "r\n"
     port1.write(string.encode())
+    port2.write(string.encode())
+    port3.write(string.encode())
     print("Reset game!")
     return;
 
