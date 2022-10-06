@@ -157,6 +157,7 @@ def winnerFlash(player):
     return;
 
 def reset_game(channel):
+    global target
     global gameOver
     gameOver = 0
     string = "r\n"
