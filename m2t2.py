@@ -8,7 +8,7 @@ reset_button_1 = 16
 reset_button_2 = 17
 reset_button_3 = 27
 
-randomize_color_switch = 0
+randomize_color_switch = 25
 
 submit_switch_1 = 6
 submit_switch_2 = 24
