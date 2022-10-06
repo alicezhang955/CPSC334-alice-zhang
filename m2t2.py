@@ -80,6 +80,8 @@ def resetTarget(channel):
     print("Reset target!")
     reset_mem = reset_mem + '\n'
     port1.write(reset_mem.encode())
+    port2.write(reset_mem.encode())
+    port3.write(reset_mem.encode())
     print(reset_mem)
 
     return;
@@ -225,50 +227,68 @@ def main():
         string1 = port1.read()
         string1 = string1.decode()
         if(len(string1)):
-            # print("String: ", string1)
-            if(string1 == "p"):
-                val_string1 = ""
-                read_state_1 = 1
-            if(read_state_1 > 0):
-                if(string1 == "d"):
-                    read_state_1 = 0
-                    print(val_string1)
-                    # GPIO.remove_event_detect(butpin)
-                    extractVals(val_string1, 0)
-                else:
-                    val_string1 += string1
+            if(string1 == "w"):
+                winnerFlash(0)
 
         string2 = port2.read()
         string2 = string2.decode()
         if(len(string2)):
-            # print("String: ", string2)
-            if(string2 == "p"):
-                val_string2 = ""
-                read_state_2 = 1
-            if(read_state_2 > 0):
-                if(string2 == "d"):
-                    read_state_2 = 0
-                    print(val_string2)
-                    # GPIO.remove_event_detect(butpin)
-                    extractVals(val_string2, 1)
-                else:
-                    val_string2 += string2
+            if(string2 == "w"):
+                winnerFlash(1)
 
         string3 = port3.read()
         string3 = string3.decode()
         if(len(string3)):
-            # print("String: ", string3)
-            if(string3 == "p"):
-                val_string3 = ""
-                read_state_3 = 1
-            if(read_state_3 > 0):
-                if(string3 == "d"):
-                    read_state_3 = 0
-                    print(val_string3)
-                    # GPIO.remove_event_detect(butpin)
-                    extractVals(val_string3, 2)
-                else:
-                    val_string3 += string3
+            if(string3 == "w"):
+                winnerFlash(2)
+
+        # string1 = port1.read()
+        # string1 = string1.decode()
+        # if(len(string1)):
+        #     # print("String: ", string1)
+        #     if(string1 == "p"):
+        #         val_string1 = ""
+        #         read_state_1 = 1
+        #     if(read_state_1 > 0):
+        #         if(string1 == "d"):
+        #             read_state_1 = 0
+        #             print(val_string1)
+        #             # GPIO.remove_event_detect(butpin)
+        #             extractVals(val_string1, 0)
+        #         else:
+        #             val_string1 += string1
+
+        # string2 = port2.read()
+        # string2 = string2.decode()
+        # if(len(string2)):
+        #     # print("String: ", string2)
+        #     if(string2 == "p"):
+        #         val_string2 = ""
+        #         read_state_2 = 1
+        #     if(read_state_2 > 0):
+        #         if(string2 == "d"):
+        #             read_state_2 = 0
+        #             print(val_string2)
+        #             # GPIO.remove_event_detect(butpin)
+        #             extractVals(val_string2, 1)
+        #         else:
+        #             val_string2 += string2
+
+        # string3 = port3.read()
+        # string3 = string3.decode()
+        # if(len(string3)):
+        #     # print("String: ", string3)
+        #     if(string3 == "p"):
+        #         val_string3 = ""
+        #         read_state_3 = 1
+        #     if(read_state_3 > 0):
+        #         if(string3 == "d"):
+        #             read_state_3 = 0
+        #             print(val_string3)
+        #             # GPIO.remove_event_detect(butpin)
+        #             extractVals(val_string3, 2)
+        #         else:
+        #             val_string3 += string3
                 
                 
 

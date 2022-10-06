@@ -100,6 +100,21 @@ int interpret(char c){
 
 }
 
+int calculateDist(){
+  int val1 = ledArray[0];
+  int val2 = ledArray[1];
+  int val3 = ledArray[2];
+  int ret = 0;
+
+  double distance = sqrt((val1 - mainLed[0])^2 + (val2 - mainLed[1]^2) + (val3 - mainLed[2]^2));
+
+  if(distance < 100){
+    ret = 1;
+  }
+
+  return ret;
+}
+
 void setup(){
   Serial.begin(115200);          //  setup serial
   pinMode(rled, OUTPUT);
@@ -154,40 +169,38 @@ void loop(){
       comstate = NO_STATE;
     }
     else if(comstate == T_STATE){
-      // Serial.write("A");
-      // ledArray[0] = mainLed[0];
-      // ledArray[1] = mainLed[1];
-      // ledArray[2] = mainLed[2];
-
-      // analogWrite(rledMain, mainLed[0]);
-      // analogWrite(gledMain, mainLed[1]);
-      // analogWrite(bledMain, mainLed[2]);
       comstate = NO_STATE;
     }
-    else if(comstate == S_STATE){
-      Serial.write("S");
-      char s[16];
-      int index = 2;
-      char buf[32];
-      char cpy[16];
-      buf[0] = 'p';
-      buf[1] = '1'; //differ by player
-      buf[2] = '\0';
+    else if(comstate == S_STATE){ //calculate in ESP
+      int win = calculateDist();
 
-      for(int i = 0; i < 3; i++){
-        strncpy(cpy, " ", 1);
-        strncat(buf, cpy, 1);
-        strncpy(cpy, itoa(ledArray[i], s, 10), 3);
-        strncat(buf, cpy, 3);
+      if(win){
+        Serial.write("w");
       }
-      strncpy(cpy, "d", 1);
-      strncat(buf, cpy, 1);
 
-      Serial.write(buf);
+      comstate == W_STATE;
+      // Serial.write("S");
+      // char s[16];
+      // int index = 2;
+      // char buf[32];
+      // char cpy[16];
+      // buf[0] = 'p';
+      // buf[1] = '1'; //differ by player
+      // buf[2] = '\0';
+
+      // for(int i = 0; i < 3; i++){
+      //   strncpy(cpy, " ", 1);
+      //   strncat(buf, cpy, 1);
+      //   strncpy(cpy, itoa(ledArray[i], s, 10), 3);
+      //   strncat(buf, cpy, 3);
+      // }
+      // strncpy(cpy, "d", 1);
+      // strncat(buf, cpy, 1);
+
+      // Serial.write(buf);
       comstate = NO_STATE;
     }
     else if(comstate == W_STATE){
-      // Serial.write("W");
       if(millis() % 1000 >= 500){
         ledArray[0] = 0;
         ledArray[1] = 0;
