@@ -8,11 +8,7 @@ reset_button_1 = 16 #purple
 reset_button_2 = 17
 reset_button_3 = 27
 
-<<<<<<< HEAD
 randomize_color_switch = 26 #blue
-=======
-randomize_color_switch = 25
->>>>>>> 1b500a375f41e8849cd48a7d033205930db1a82d
 
 submit_switch_1 = 6 #green
 submit_switch_2 = 24
@@ -42,15 +38,9 @@ gameOver = 0
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-<<<<<<< HEAD
         port1 = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
         port2 = serial.Serial("/dev/ttyUSB3", 115200, timeout=1)
         port3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
-=======
-        port1 = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
-        #port2 = serial.Serial("/dev/ttyUSB3", 115200, timeout=1)
-        # port3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
->>>>>>> 1b500a375f41e8849cd48a7d033205930db1a82d
 
     except: # Bad way of writing excepts (always know your errors)
         if(time.time() - prev > 2): # Don't spam with msg
