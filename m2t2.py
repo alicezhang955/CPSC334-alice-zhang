@@ -163,6 +163,8 @@ def reset_game(channel):
     port1.write(string.encode())
     port2.write(string.encode())
     port3.write(string.encode())
+
+    target = [0, 0, 0]
     print("Reset game!")
     return;
 
