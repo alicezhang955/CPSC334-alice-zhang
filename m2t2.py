@@ -108,8 +108,8 @@ def calculateDist(val1, val2, val3, player):
     distance = np.sqrt((val1 - target[0])**2 + (val2 - target[1])**2 + (val3 - target[2])**2)
     print("vals = ", val1, val2, val3, target[0], target[1], target[2], "distance = ", distance)
     if(distance < 100):
-        winner[player] = 1
         print("WINNER = ", player)
+        winner[player] = 1
     return;
 
 
