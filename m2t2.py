@@ -209,7 +209,7 @@ def main():
     GPIO.add_event_detect(randomize_color_switch,GPIO.RISING,callback=resetTarget, bouncetime = 500)
 
     while(1):
-        time.sleep(0.5)
+        # time.sleep(0.5)
 
         if(not gameOver):
             for i in range(3):
