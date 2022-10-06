@@ -220,7 +220,7 @@ def main():
         string1 = port1.read()
         string1 = string1.decode()
         if(len(string1)):
-            print("String: ", string1)
+            # print("String: ", string1)
             if(string1 == "p"):
                 val_string1 = ""
                 read_state_1 = 1
