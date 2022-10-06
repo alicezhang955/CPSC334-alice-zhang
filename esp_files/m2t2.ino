@@ -176,9 +176,13 @@ void loop(){
 
       if(win){
         Serial.write("w");
+        comstate = W_STATE;
+      }
+      else{
+        comstate = NO_STATE;
       }
 
-      comstate == W_STATE;
+      
       // Serial.write("S");
       // char s[16];
       // int index = 2;
@@ -198,9 +202,10 @@ void loop(){
       // strncat(buf, cpy, 1);
 
       // Serial.write(buf);
-      comstate = NO_STATE;
+      // comstate = NO_STATE;
     }
     else if(comstate == W_STATE){
+      // Serial.print("G");
       if(millis() % 1000 >= 500){
         ledArray[0] = 0;
         ledArray[1] = 0;
