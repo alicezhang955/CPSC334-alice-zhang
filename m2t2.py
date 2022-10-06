@@ -189,7 +189,7 @@ def main():
     GPIO.setup(reset_button_2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(reset_button_3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     
-    GPIO.setup(submit_switch_1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(submit_switch_1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(submit_switch_2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(submit_switch_3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
