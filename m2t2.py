@@ -214,6 +214,7 @@ def main():
         if(not gameOver):
             for i in range(3):
                 if(winner[i] == 1):
+                    print("Game over! Flashing winner")
                     winnerFlash(str(i))
 
         string1 = port1.read()
