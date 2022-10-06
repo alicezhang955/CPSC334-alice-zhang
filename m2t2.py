@@ -38,7 +38,7 @@ gameOver = 0
 while(not SETUP):
     try:
     # 					 Serial port(windows-->COM), baud rate, timeout msg
-        port1 = serial.Serial("/dev/ttyUSB0", 115200, timeout=1)
+        port1 = serial.Serial("/dev/ttyUSB3", 115200, timeout=1)
         port2 = serial.Serial("/dev/ttyUSB1", 115200, timeout=1)
         port3 = serial.Serial("/dev/ttyUSB2", 115200, timeout=1)
 
@@ -148,13 +148,13 @@ def winnerFlash(player):
     for i in range(3):
         winner[i] = 0
 
-    string = "w" + player + '\n'
-    if(player == "0"):
-        port1.write(string.encode())
-    elif(player == "1"):
-        port2.write(string.encode())
-    else:
-        port3.write(string.encode())
+    # string = "w" + player + '\n'
+    # if(player == "0"):
+    #     port1.write(string.encode())
+    # elif(player == "1"):
+    #     port2.write(string.encode())
+    # else:
+    #     port3.write(string.encode())
     print("Flashing Winner" + str(player) + "!")
     return;
 
