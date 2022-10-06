@@ -198,11 +198,11 @@ def main():
 
 
     GPIO.add_event_detect(reset_button_1,GPIO.RISING,callback=reset_board_1, bouncetime = 500) 
-    GPIO.add_event_detect(reset_button_2,GPIO.RISING,callback=reset_board_2, bouncetime = 500) 
+    # GPIO.add_event_detect(reset_button_2,GPIO.RISING,callback=reset_board_2, bouncetime = 500) 
     # GPIO.add_event_detect(reset_button_3,GPIO.RISING,callback=reset_board_3, bouncetime = 500) 
     
     GPIO.add_event_detect(submit_switch_1,GPIO.RISING,callback=submit_color_1, bouncetime = 500) 
-    GPIO.add_event_detect(submit_switch_2,GPIO.RISING,callback=submit_color_2, bouncetime = 500) 
+    # GPIO.add_event_detect(submit_switch_2,GPIO.RISING,callback=submit_color_2, bouncetime = 500) 
     # GPIO.add_event_detect(submit_switch_3,GPIO.RISING,callback=submit_color_3, bouncetime = 500) 
 
     GPIO.add_event_detect(reset_game_pin,GPIO.RISING,callback=reset_game, bouncetime = 500) 
