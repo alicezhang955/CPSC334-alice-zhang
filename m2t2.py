@@ -4,13 +4,13 @@ import time
 import random
 import numpy as np
 
-reset_button_1 = 16 #purple
+reset_button_1 = 16 
 reset_button_2 = 17
 reset_button_3 = 27
 
-randomize_color_switch = 26 #blue
+randomize_color_switch = 26 
 
-submit_switch_1 = 6 #green
+submit_switch_1 = 6 
 submit_switch_2 = 24
 submit_switch_3 = 23
 
@@ -23,17 +23,9 @@ port1 = None
 port2 = None
 port3 = None
 
-read_state_1 = 0
-read_state_2 = 0
-read_state_3 = 0
-
 target = [0, 0, 0]
 
 prev = time.time()
-
-winner = [0, 0, 0]
-
-gameOver = 0
 
 while(not SETUP):
     try:
@@ -104,64 +96,12 @@ def submit_color_3(channel):
     port3.write(sub_col.encode())
     return;
 
-def calculateDist(val1, val2, val3, player):
-    global target
-    global winner
-    distance = np.sqrt((val1 - target[0])**2 + (val2 - target[1])**2 + (val3 - target[2])**2)
-    print("vals = ", val1, val2, val3, target[0], target[1], target[2], "distance = ", distance)
-    if(distance < 100):
-        print("WINNER = ", player + 1)
-        winner[player] = 1
-    return;
-
-
-def extractVals(string, player):
-    global target
-    count = 0
-    val1 = ""
-    val2 = ""
-    val3 = ""
-
-    # player = string[1]
-
-    for i in range(len(string)):
-        if(string[i] == " "):
-            count += 1
-
-        if(count == 1):
-            val1 += string[i]
-        elif(count == 2):
-            val2 += string[i]
-        elif(count == 3):
-            val3 += string[i]
-
-    print("player: ", player, " val1: ", val1, " val2: ", val2, " val3: ", val3)
-    calculateDist(int(val1), int(val2), int(val3), player)
-    # GPIO.add_event_detect(butpin,GPIO.RISING,callback=button_callback, bouncetime = 500) 
-    return;
-
 def winnerFlash(player):
-    global winner
-    global gameOver
-    gameOver = 1
-
-    for i in range(3):
-        winner[i] = 0
-
-    # string = "w" + player + '\n'
-    # if(player == "0"):
-    #     port1.write(string.encode())
-    # elif(player == "1"):
-    #     port2.write(string.encode())
-    # else:
-    #     port3.write(string.encode())
     print("Flashing Winner" + str(player) + "!")
     return;
 
 def reset_game(channel):
     global target
-    global gameOver
-    gameOver = 0
     string = "r\n"
     port1.write(string.encode())
     port2.write(string.encode())
@@ -184,10 +124,6 @@ def main():
     global reset_game_pin
     global randomize_color_switch
 
-    global read_state_1
-    global read_state_2
-    global read_state_3
-    global gameOver
     global target
 
     GPIO.setmode(GPIO.BCM)
@@ -216,85 +152,25 @@ def main():
     GPIO.add_event_detect(randomize_color_switch,GPIO.RISING,callback=resetTarget, bouncetime = 500)
 
     while(1):
-        # time.sleep(0.5)
-
-        if(not gameOver):
-            for i in range(3):
-                if(winner[i] == 1):
-                    print("Game over! Flashing winner")
-                    winnerFlash(str(i))
 
         string1 = port1.read()
         string1 = string1.decode()
         if(len(string1)):
-#            print("String: ", string1)
             if(string1 == "w"):
                 winnerFlash(0)
 
         string2 = port2.read()
         string2 = string2.decode()
         if(len(string2)):
- #           print("String: ", string2)
             if(string2 == "w"):
                 winnerFlash(1)
 
         string3 = port3.read()
         string3 = string3.decode()
         if(len(string3)):
-  #          print("String: ", string3)
             if(string3 == "w"):
                 winnerFlash(2)
-
-        # string1 = port1.read()
-        # string1 = string1.decode()
-        # if(len(string1)):
-        #     # print("String: ", string1)
-        #     if(string1 == "p"):
-        #         val_string1 = ""
-        #         read_state_1 = 1
-        #     if(read_state_1 > 0):
-        #         if(string1 == "d"):
-        #             read_state_1 = 0
-        #             print(val_string1)
-        #             # GPIO.remove_event_detect(butpin)
-        #             extractVals(val_string1, 0)
-        #         else:
-        #             val_string1 += string1
-
-        # string2 = port2.read()
-        # string2 = string2.decode()
-        # if(len(string2)):
-        #     # print("String: ", string2)
-        #     if(string2 == "p"):
-        #         val_string2 = ""
-        #         read_state_2 = 1
-        #     if(read_state_2 > 0):
-        #         if(string2 == "d"):
-        #             read_state_2 = 0
-        #             print(val_string2)
-        #             # GPIO.remove_event_detect(butpin)
-        #             extractVals(val_string2, 1)
-        #         else:
-        #             val_string2 += string2
-
-        # string3 = port3.read()
-        # string3 = string3.decode()
-        # if(len(string3)):
-        #     # print("String: ", string3)
-        #     if(string3 == "p"):
-        #         val_string3 = ""
-        #         read_state_3 = 1
-        #     if(read_state_3 > 0):
-        #         if(string3 == "d"):
-        #             read_state_3 = 0
-        #             print(val_string3)
-        #             # GPIO.remove_event_detect(butpin)
-        #             extractVals(val_string3, 2)
-        #         else:
-        #             val_string3 += string3
                 
-                
-
-
+            
 if __name__=="__main__":
     main()

@@ -29,8 +29,6 @@ EasyButton button(33);
 
 int clearBoard = 0;
 
-
-
 char c; // IN char
 char str[CMD_BUFF_LEN];
 uint8_t idx = 0; // Reading index
@@ -59,12 +57,6 @@ void setColors(int joyinput, int state){ //state = color index, increment = -1, 
   }
 }
 
-void setMainLed(int r, int g, int b){
-  mainLed[0] = r;
-  mainLed[1] = g;
-  mainLed[2] = b;
-}
-
 void setState(){
   if(state == 0){
     state = 1;
@@ -78,7 +70,6 @@ void setState(){
 }
 
 int interpret(char c){
-  // Serial.write(c);
   if(c == 'b'){
     return B_STATE;
   }
@@ -108,8 +99,6 @@ int calculateDist(){
 
   double distance = sqrt((val1 - mainLed[0])^2 + (val2 - mainLed[1])^2 + (val3 - mainLed[2])^2);
 
-  
-
   if(distance < 100){
     ret = 1;
   }
@@ -136,23 +125,17 @@ void loop(){
     c = Serial.read();
     if(c != '\n'){ // Still reading
       str[idx++] = c; // Parse the string byte (char) by byte
-      Serial.write(c);
     }
     else{ // Done reading
       str[idx] = '\0'; // Convert it to a string
       comstate = interpret(str[0]);
       
       if(comstate == T_STATE){
-        // char buf[3];
         int i1, i2, i3;
         if (3 == sscanf(str, "%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d", &i1, &i2, &i3)){
-          // Serial.write("T");
           mainLed[0] = i1;
-          // Serial.write(itoa(mainLed[0], buf, 10));
           mainLed[1] = i2;
-          // Serial.write(itoa(mainLed[1], buf, 10));
           mainLed[2] = i3;
-          // Serial.write(itoa(mainLed[2], buf, 10));
         }
       }
       idx = 0;
@@ -160,11 +143,9 @@ void loop(){
   }
   if(millis() % 500 == 0){
     int joyinput = analogRead(joypin);
-    // Serial.println(joyinput);
     setColors(joyinput, state);
 
     if(comstate == B_STATE){
-      Serial.write("B");
       ledArray[0] = 0;
       ledArray[1] = 0;
       ledArray[2] = 0;     
@@ -183,31 +164,8 @@ void loop(){
       else{
         comstate = NO_STATE;
       }
-
-      
-      // Serial.write("S");
-      // char s[16];
-      // int index = 2;
-      // char buf[32];
-      // char cpy[16];
-      // buf[0] = 'p';
-      // buf[1] = '1'; //differ by player
-      // buf[2] = '\0';
-
-      // for(int i = 0; i < 3; i++){
-      //   strncpy(cpy, " ", 1);
-      //   strncat(buf, cpy, 1);
-      //   strncpy(cpy, itoa(ledArray[i], s, 10), 3);
-      //   strncat(buf, cpy, 3);
-      // }
-      // strncpy(cpy, "d", 1);
-      // strncat(buf, cpy, 1);
-
-      // Serial.write(buf);
-      // comstate = NO_STATE;
     }
     else if(comstate == W_STATE){
-      // Serial.print("G");
       if(millis() % 1000 >= 500){
         ledArray[0] = 0;
         ledArray[1] = 0;
@@ -220,7 +178,6 @@ void loop(){
       }
     }
     else if(comstate == R_STATE){
-      Serial.write("R");
         ledArray[0] = 0;
         ledArray[1] = 0;
         ledArray[2] = 0;
@@ -238,7 +195,5 @@ void loop(){
     // Serial.println(ledArray[0]);
     // Serial.println(ledArray[1]);
     // Serial.println(ledArray[2]);
-
-
   }
 }
