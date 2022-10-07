@@ -106,7 +106,9 @@ int calculateDist(){
   int val3 = ledArray[2];
   int ret = 0;
 
-  double distance = sqrt((val1 - mainLed[0])^2 + (val2 - mainLed[1]^2) + (val3 - mainLed[2]^2));
+  double distance = sqrt((val1 - mainLed[0])^2 + (val2 - mainLed[1])^2 + (val3 - mainLed[2])^2);
+
+  
 
   if(distance < 100){
     ret = 1;
