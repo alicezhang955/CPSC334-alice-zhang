@@ -12,4 +12,4 @@ Servo Motor:
 - Powered by 3V3, GND from ESP32
 - Control input connected to ESP32 GPIO 12
 
-![alt text](https://https://github.com/alicezhang955/CPSC334-alice-zhang/blob/master/module-4/task1/cpsc334_m4_t1_wiring.jpg?raw=true)
+![alt text](https://raw.githubusercontent.com/alicezhang955/CPSC334-alice-zhang/master/module-4/task1/cpsc334_m4_t1_wiring.jpg)
